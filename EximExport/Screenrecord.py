@@ -20,7 +20,7 @@ def record_screen(output_path, stop_event: Event):
             frame = np.array(img)
             #Converts the screenshot (PIL Image) into a NumPy array, which OpenCV can work with.
             frame = cv2.cvtColor(frame, cv2.COLOR_RGB2BGR)
-            #Converts the color format from RGB to BGR.PyAutoGUI screenshots use RGB, but OpenCV uses BGR by default, so this conversion is necessary to show correct colors.
+            #Converts the color format from RGB to BGR.PyAutoGUI screenshots use RGB, but OpenCV uses BGR by default, so this conversion is necessary to show the correct colors.
             out.write(frame)
             #Writes the current frame (image) to the video file.
     except Exception as e:
@@ -31,7 +31,7 @@ def record_screen(output_path, stop_event: Event):
         #Releases the VideoWriter resource to properly close the video file and save it correctly.
         print("🛑 Screen recording stopped.")
 
-#Summary For the above File
+#Summary For the above File for the video recording
 '''
 This function captures your screen continuously in a loop, writes the screenshots as frames to a video file, and stops cleanly when told to via 
 the stop_event. It handles color conversion and video encoding using OpenCV and uses a thread-safe event to signal stopping the recording.
