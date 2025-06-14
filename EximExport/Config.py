@@ -4,9 +4,7 @@ from selenium.common import TimeoutException
 from selenium.webdriver import ActionChains
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
-
 from Exim.LoginPage import *
-
 
 def wait_for_loader_to_disappear(driver, timeout=45):
     try:
@@ -25,7 +23,6 @@ def wait_for_loader_to_disappear(driver, timeout=45):
     except TimeoutException:
         print("[Timeout] Loader did not disappear within time")
 
-
 def safe_click(driver, xpath, timeout=45):
     try:
         wait_for_loader_to_disappear(driver)
@@ -38,7 +35,6 @@ def safe_click(driver, xpath, timeout=45):
         print(f"[Timeout] Element {xpath} not clickable after {timeout}s")
     except Exception as e:
         print(f"[Error] Clicking {xpath}: {str(e)}")
-
 
 def safe_send_keys(driver, xpath, value, timeout=45):
     try:
@@ -53,7 +49,6 @@ def safe_send_keys(driver, xpath, value, timeout=45):
         print(f"[Timeout] Could not send keys to {xpath}")
     except Exception as e:
         print(f"[Error] send_keys on {xpath}: {str(e)}")
-
 
 def force_click_with_actions(driver, xpath, filepath=r"D:\Testing Plan for Web Application.pdf"):
     try:
@@ -71,11 +66,9 @@ def force_click_with_actions(driver, xpath, filepath=r"D:\Testing Plan for Web A
     except Exception as e:
         print(f"[Error] Force click failed: {e}")
 
-
 def importoption(driver):
     wait_for_loader_to_disappear(driver, timeout=45)
     safe_click(driver, "(//div[@class='dot'])[1]")
-
 
 @pytest.fixture(scope="session")
 def driver():
@@ -103,11 +96,10 @@ def driver():
     driver.maximize_window()
     login(driver)
     #importoption(driver)
-    documents(driver)
+    #documents(driver)
     #transactions(driver)
     yield driver
     driver.quit()
-
 
 def login(driver):
     username(driver)
@@ -116,7 +108,6 @@ def login(driver):
     perform_otp(driver)
     perform_login(driver)
     time.sleep(2)
-
 
 def documents(driver):
     safe_click(driver, "(//a[normalize-space()='Documents'])[1]")
@@ -129,14 +120,11 @@ def longfilewarningmessage(driver):
                                         "(//div[@aria-label='File is too big (25.13MiB). Max filesize: 5MiB.'])[1]")
     print("Validation Message:", error_message)
 
-
 def view(driver):
     safe_click(driver, "(//i[@class='fa fa-eye PopupOpen view-icon ng-tns-c428-69'])[1]")
 
-
 def edit(driver):
     safe_click(driver, "(//i[@class='fa fa-pencil-square-o PopupOpen edit-icon ng-tns-c428-69'])[1]")
-
 
 def get_toast_alert_text(driver):
     try:
